@@ -5,4 +5,4 @@ The objective of this project was to create a day planner that covers the typica
 
 [link to deployed project](https://nzerr57.github.io/work-day-scheduler/)
 
-![screenshot of project](https://github.com/nzerr57/work-day-scheduler/blob/5e04e84e512c2ab1db42e33a4c1af2ee0db90585/assets/project-screenshot.pdf)
+![screenshot of project](https://github.com/nzerr57/work-day-scheduler/blob/423bc2ee6ed8c62eee86565d31e2f1af622f433f/assets/project-screenshot.png)
