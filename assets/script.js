@@ -1,7 +1,6 @@
 var timeDisplayEl = $('#currentDay');
 var saveButtons = $('.saveBtn');
-var currentHour = moment().hour();
-
+var rows = $('.time-block');
 
 //Function to display the current time at the top of the page
 function displayTime() {
@@ -13,56 +12,48 @@ function displayTime() {
 
 //Allows any user inputs to still display after page refresh
 
-$('#9am .description').val(JSON.parse(localStorage.getItem('nineAM')));
+$('#9 .description').val(JSON.parse(localStorage.getItem('9')));
 
-$('#10am .description').val(JSON.parse(localStorage.getItem('tenAM')));
+$('#10 .description').val(JSON.parse(localStorage.getItem('10')));
 
-$('#11am .description').val(JSON.parse(localStorage.getItem('elevenAM')));
+$('#11 .description').val(JSON.parse(localStorage.getItem('11')));
 
-$('#12pm .description').val(JSON.parse(localStorage.getItem('twelvePM')));
+$('#12 .description').val(JSON.parse(localStorage.getItem('12')));
 
-$('#1pm .description').val(JSON.parse(localStorage.getItem('onePM')));
+$('#13 .description').val(JSON.parse(localStorage.getItem('13')));
 
-$('#2pm .description').val(JSON.parse(localStorage.getItem('twoPM')));
+$('#14 .description').val(JSON.parse(localStorage.getItem('14')));
 
-$('#3pm .description').val(JSON.parse(localStorage.getItem('threePM')));
+$('#15 .description').val(JSON.parse(localStorage.getItem('15')));
 
-$('#4pm .description').val(JSON.parse(localStorage.getItem('fourPM')));
+$('#16 .description').val(JSON.parse(localStorage.getItem('16')));
 
-$('#5pm .description').val(JSON.parse(localStorage.getItem('fivePM')));
+$('#17 .description').val(JSON.parse(localStorage.getItem('17')));
 
 
 //Saves user input to local storage once save button is clicked
 
-saveButtons.on('click', function (event) {
-    event.preventDefault();
-    var nineAM = $('#9am .description').val();
-    localStorage.setItem('nineAM', JSON.stringify(nineAM));
+$('.container').on('click','.saveBtn', function (event) {
+    var textArea = $(this).prev().val();
+    var hour = $(this).closest('.time-block').attr('id');
+    localStorage.setItem(hour, JSON.stringify(textArea));
 
-    var tenAM = $('#10am .description').val();
-    localStorage.setItem('tenAM', JSON.stringify(tenAM));
-
-    var elevenAM = $('#11am .description').val();
-    localStorage.setItem('elevenAM', JSON.stringify(elevenAM));
-
-    var twelvePM = $('#12pm .description').val();
-    localStorage.setItem('twelvePM', JSON.stringify(twelvePM));
-
-    var onePM = $('#1pm .description').val();
-    localStorage.setItem('onePM', JSON.stringify(onePM));
-
-    var twoPM = $('#2pm .description').val();
-    localStorage.setItem('twoPM', JSON.stringify(twoPM));
-
-    var threePM = $('#3pm .description').val();
-    localStorage.setItem('threePM', JSON.stringify(threePM));
-
-    var fourPM = $('#4pm .description').val();
-    localStorage.setItem('fourPM', JSON.stringify(fourPM));
-
-    var fivePM = $('#5pm .description').val();
-    localStorage.setItem('fivePM', JSON.stringify(fivePM));
 });
 
+var currentHour = moment().hour();
+
+//Applies color-coding to time blocks based on current time
+$('.time-block').each(function(){
+    var timeCheck = parseInt($(this).attr("id"));
+    if (timeCheck < currentHour){
+        $(this).addClass("past");
+    } else if (timeCheck === currentHour){
+        $(this).addClass("present");
+        $(this).removeClass("past");
+    } else {$(this).addClass("future");
+    $(this).removeClass("past");
+    $(this).removeClass("present");
+    }
+})
 
 setInterval(displayTime, 1000);
